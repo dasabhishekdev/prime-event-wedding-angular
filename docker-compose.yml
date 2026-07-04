@@ -1,0 +1,25 @@
+# Joins Portfolio edge nginx on shared Docker network `web`.
+#
+# Prerequisite — start Portfolio stack first (creates network `web`):
+#   cd ~/abhishek-das-portfolio
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# Deploy:
+#   docker compose up -d --build
+#
+# Edge routing: Portfolio/docker/nginx/conf.d/primeevent.conf
+
+services:
+  prime-event-wedding:
+    build: .
+    container_name: prime-event-wedding
+    restart: unless-stopped
+    expose:
+      - "80"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+    name: web

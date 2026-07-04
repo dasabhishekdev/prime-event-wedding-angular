@@ -1,8 +1,8 @@
 <div class="container-fluid align-item-center">
 
   <div class="w-100 ">
-    <swiper #swiper [loop]="true" [autoHeight]="true" [navigation]="true" [pagination]="{ clickable: true }"
-      [pagination]="{ clickable: true }" direction="horizontal" (slideChange)="onSlide()">
+    <swiper #swiper [loop]="true" [navigation]="true" [pagination]="{ clickable: true }"
+      direction="horizontal" (slideChange)="onSlide()">
       <ng-template swiperSlide>
         <div class="slider container-fluid d-flex justify-content-center">
           <div class="slide-img" [style.backgroundImage]="'url('+'../../../assets/images/hero_images/hero1.jpg'+')'">

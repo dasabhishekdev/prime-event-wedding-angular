@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json ",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
+    "docker:up": "docker compose up -d --build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

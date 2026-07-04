@@ -28,8 +28,6 @@ export class HomePageComponent implements OnInit {
     scrollbar: { draggable: true },
   };
   onSlide() {
-    AOS.init({
-      mirror: true,
-    });
+    AOS.refresh();
   }
 }
