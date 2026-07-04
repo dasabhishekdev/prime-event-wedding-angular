@@ -14,7 +14,7 @@ export const siteConfig = {
   },
   defaultDescription:
     'Prime Event & Wedding is a Kolkata-based event management company with 10+ years of experience planning weddings, engagements, corporate events, and celebrations across India.',
-  ogImage: '/assets/marks/logo.png',
+  ogImage: '/assets/og/og-default.jpg',
   social: {
     facebook: 'https://www.facebook.com/primeeventandwedding',
     instagram: 'https://www.instagram.com/primeeventandwedding',
@@ -113,5 +113,23 @@ export const pageSeo: Record<string, PageSeo> = {
     description:
       'Tell Prime Event & Wedding about your event experience. Your feedback helps us improve every celebration we plan.',
     path: '/Home/default/feedback',
+  },
+  bestWeddingPlanners: {
+    title: 'Best Wedding Planners in Kolkata | Prime Event & Wedding',
+    description:
+      'Compare top wedding planners in Kolkata. Prime Event & Wedding offers full-service decor, venue, catering, and coordination with 10+ years of experience.',
+    path: '/Home/default/best-wedding-planners-kolkata',
+  },
+  weddingPlanningKolkata: {
+    title: 'Wedding Planning in Kolkata | Prime Event & Wedding',
+    description:
+      'Professional wedding planning in Kolkata — decor, venue, catering, photography coordination, and guest management by Prime Event & Wedding.',
+    path: '/Home/default/wedding-planning-kolkata',
+  },
+  eventManagementKolkata: {
+    title: 'Event Management Companies in Kolkata | Prime Event & Wedding',
+    description:
+      'Leading event management company in Kolkata for weddings, corporate events, college fests, and product launches. Prime Event & Wedding — 10+ years experience.',
+    path: '/Home/default/event-management-companies-kolkata',
   },
 };

@@ -14,6 +14,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.init();
-    AOS.init();
+    this.initAosWhenIdle();
+  }
+
+  private initAosWhenIdle(): void {
+    const start = () =>
+      AOS.init({
+        once: true,
+        duration: 800,
+      });
+
+    if ('requestIdleCallback' in window) {
+      (window as Window & { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(start);
+      return;
+    }
+
+    setTimeout(start, 100);
   }
 }

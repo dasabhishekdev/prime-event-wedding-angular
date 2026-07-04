@@ -1,0 +1,15 @@
+/Home/best-event-organizer
+/Home/default/services
+/Home/default/wedding-or-anniversary-event
+/Home/default/engagement-or-ring-ceremony-event
+/Home/default/birthday-house-party
+/Home/default/school-college-event
+/Home/default/corporate-or-office-event
+/Home/default/product-launch-event
+/Home/default/portfolio
+/Home/default/why-primeevent
+/Home/default/about
+/Home/default/contact-us
+/Home/default/best-wedding-planners-kolkata
+/Home/default/wedding-planning-kolkata
+/Home/default/event-management-companies-kolkata

@@ -73,9 +73,21 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.primeeventandwedding.co.in/Home/default/feedback</loc>
+    <loc>https://www.primeeventandwedding.co.in/Home/default/best-wedding-planners-kolkata</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.primeeventandwedding.co.in/Home/default/wedding-planning-kolkata</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.primeeventandwedding.co.in/Home/default/event-management-companies-kolkata</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

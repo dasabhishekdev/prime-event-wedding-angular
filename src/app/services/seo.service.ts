@@ -2,7 +2,26 @@ import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { LocalSeoContent } from '../config/local-seo.config';
 import { pageSeo, siteConfig } from '../config/site.config';
+
+const BREADCRUMB_LABELS: Record<string, string> = {
+  services: 'Services',
+  'contact-us': 'Contact Us',
+  'why-primeevent': 'Why Choose Us',
+  'wedding-or-anniversary-event': 'Wedding & Anniversary',
+  'engagement-or-ring-ceremony-event': 'Engagement & Ring Ceremony',
+  'birthday-house-party': 'Birthday & House Party',
+  'school-college-event': 'School & College Fest',
+  'corporate-or-office-event': 'Corporate Events',
+  'product-launch-event': 'Product Launch',
+  portfolio: 'Gallery',
+  about: 'About Us',
+  feedback: 'Feedback',
+  'best-wedding-planners-kolkata': 'Best Wedding Planners Kolkata',
+  'wedding-planning-kolkata': 'Wedding Planning Kolkata',
+  'event-management-companies-kolkata': 'Event Management Kolkata',
+};
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -22,6 +41,11 @@ export class SeoService {
     this.updateFromRoute();
   }
 
+  applyLocalSeoPage(content: LocalSeoContent): void {
+    this.applySeo(content.title, content.metaDescription, content.path);
+    this.injectFaqSchema(content.faqs);
+  }
+
   updatePage(seoKey: keyof typeof pageSeo): void {
     const seo = pageSeo[seoKey];
     if (!seo) {
@@ -38,6 +62,13 @@ export class SeoService {
 
     if (isPrivateRoute) {
       this.setMeta('robots', 'noindex, nofollow');
+      return;
+    }
+
+    if (url.includes('/feedback')) {
+      this.setMeta('robots', 'noindex, follow');
+      const seo = pageSeo['feedback'];
+      this.applySeo(seo.title, seo.description, seo.path);
       return;
     }
 
@@ -62,6 +93,8 @@ export class SeoService {
     this.setMeta('og:url', canonical, true);
     this.setMeta('og:site_name', siteConfig.name, true);
     this.setMeta('og:image', `${siteConfig.url}${siteConfig.ogImage}`, true);
+    this.setMeta('og:image:width', '1200', true);
+    this.setMeta('og:image:height', '630', true);
     this.setMeta('og:locale', 'en_IN', true);
 
     this.setMeta('twitter:card', 'summary_large_image');
@@ -91,6 +124,27 @@ export class SeoService {
     link.href = href;
   }
 
+  private injectFaqSchema(faqs: Array<{ question: string; answer: string }>): void {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    };
+
+    let script = document.getElementById('prime-event-faq-jsonld') as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'prime-event-faq-jsonld';
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema);
+  }
+
   private injectStructuredData(path: string): void {
     const schema = {
       '@context': 'https://schema.org',
@@ -103,7 +157,7 @@ export class SeoService {
           inLanguage: 'en-IN',
         },
         {
-          '@type': 'EventPlanner',
+          '@type': ['EventPlanner', 'LocalBusiness'],
           name: siteConfig.name,
           description: siteConfig.defaultDescription,
           url: siteConfig.url,
@@ -111,6 +165,18 @@ export class SeoService {
           image: `${siteConfig.url}${siteConfig.ogImage}`,
           email: siteConfig.email,
           telephone: siteConfig.phone,
+          priceRange: '₹₹',
+          openingHoursSpecification: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '10:00',
+            closes: '20:00',
+          },
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: 22.5868,
+            longitude: 88.3949,
+          },
           address: {
             '@type': 'PostalAddress',
             streetAddress: siteConfig.address.street,
@@ -161,11 +227,12 @@ export class SeoService {
       return crumbs;
     }
 
-    const label = segments[segments.length - 1].replace(/-/g, ' ');
+    const slug = segments[segments.length - 1];
+    const label = BREADCRUMB_LABELS[slug] ?? slug.replace(/-/g, ' ');
     crumbs.push({
       '@type': 'ListItem',
       position: 2,
-      name: label.charAt(0).toUpperCase() + label.slice(1),
+      name: label,
       item: `${siteConfig.url}${path}`,
     });
 

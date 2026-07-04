@@ -95,7 +95,7 @@
         <div class="row">
             <div class="col-md-3 mt-md-0" *ngFor="let item of imageUrls">
                 <div class="gallery-img">
-                    <img src="{{item.img_url}}" alt="" srcset="">
+                    <img src="{{item.img_url}}" alt="College fest event gallery photo" loading="lazy" width="400" height="300">
                     <i class="pi pi-search" (click)="onSwitchModal(item.img_url)"></i>
                 </div>
 
@@ -112,6 +112,6 @@
         <div class="close-btn">
             <i (click)="onSwitchModal('')" class="pi pi-times"></i>
         </div>
-        <img src={{modalImage}} alt="">
+        <img src={{modalImage}} alt="College fest photo preview" width="800" height="600">
     </div>
 </p-dialog>

@@ -22,30 +22,35 @@
   <meta property="og:description"
     content="Plan weddings, engagements, corporate events, and celebrations in Kolkata with Prime Event & Wedding.">
   <meta property="og:url" content="https://www.primeeventandwedding.co.in/Home/best-event-organizer">
-  <meta property="og:image" content="https://www.primeeventandwedding.co.in/assets/marks/logo.png">
+  <meta property="og:image" content="https://www.primeeventandwedding.co.in/assets/og/og-default.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_IN">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Prime Event & Wedding | Best Event Organizers in Kolkata">
   <meta name="twitter:description"
     content="Plan weddings, engagements, corporate events, and celebrations in Kolkata with Prime Event & Wedding.">
-  <meta name="twitter:image" content="https://www.primeeventandwedding.co.in/assets/marks/logo.png">
+  <meta name="twitter:image" content="https://www.primeeventandwedding.co.in/assets/og/og-default.jpg">
 
-  <link rel="preload" as="image" href="assets/images/hero_images/hero1.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/hero_images/hero1.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500&family=Poppins:wght@400;500;700&family=Raleway:wght@700;800&display=swap">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "EventPlanner",
+    "@type": ["EventPlanner", "LocalBusiness"],
     "name": "Prime Event & Wedding",
     "description": "Kolkata-based event management company with 10+ years of experience planning weddings, engagements, corporate events, and celebrations.",
     "url": "https://www.primeeventandwedding.co.in",
-    "logo": "https://www.primeeventandwedding.co.in/assets/marks/logo.png",
-    "image": "https://www.primeeventandwedding.co.in/assets/marks/logo.png",
+    "logo": "https://www.primeeventandwedding.co.in/assets/og/og-default.jpg",
+    "image": "https://www.primeeventandwedding.co.in/assets/og/og-default.jpg",
     "email": "primeeventandwedding@gmail.com",
     "telephone": "+91-9836366899",
+    "priceRange": "₹₹",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Ultadanga Road",
@@ -53,6 +58,11 @@
       "addressRegion": "West Bengal",
       "postalCode": "700048",
       "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 22.5868,
+      "longitude": 88.3949
     },
     "areaServed": { "@type": "City", "name": "Kolkata" },
     "sameAs": [
@@ -67,44 +77,31 @@
 <body>
   <app-root>
     <style>
-      .app-shell {
-        min-height: 95vh;
-        background: #1a0000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-family: system-ui, sans-serif;
-        text-align: center;
-        padding: 2rem;
-      }
-
-      .app-shell img {
-        max-width: 200px;
-        margin-bottom: 1.5rem;
-      }
-
-      .app-shell h1 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-      }
-
-      .app-shell p {
-        max-width: 36rem;
-        opacity: 0.85;
-        line-height: 1.5;
-      }
+      .app-shell { min-height: 95vh; background: #1a0000; color: #fff; font-family: system-ui, sans-serif; padding: 2rem; }
+      .app-shell a { color: #ca9a14; }
+      .app-shell nav { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; }
     </style>
     <div class="app-shell">
       <img src="assets/marks/logo.png" width="200" height="200" alt="Prime Event & Wedding logo">
       <h1>Prime Event & Wedding — Kolkata Event Planners</h1>
-      <p>Wedding, engagement, corporate, and celebration planning in Kolkata. Loading…</p>
+      <p>Wedding, engagement, corporate, and celebration planning in Kolkata with 10+ years of experience.</p>
+      <nav aria-label="Main navigation">
+        <a href="/Home/best-event-organizer">Home</a>
+        <a href="/Home/default/services">Services</a>
+        <a href="/Home/default/wedding-or-anniversary-event">Wedding Planning</a>
+        <a href="/Home/default/engagement-or-ring-ceremony-event">Engagement</a>
+        <a href="/Home/default/corporate-or-office-event">Corporate Events</a>
+        <a href="/Home/default/portfolio">Gallery</a>
+        <a href="/Home/default/about">About</a>
+        <a href="/Home/default/contact-us">Contact</a>
+        <a href="/Home/default/best-wedding-planners-kolkata">Best Wedding Planners Kolkata</a>
+      </nav>
+      <p>Ultadanga Road, Kolkata 700048 · +91 9836366899 · primeeventandwedding@gmail.com</p>
     </div>
     <noscript>
       <p>Prime Event & Wedding plans weddings, engagements, and corporate events in Kolkata.
-        Call +91 9836366899 or email primeeventandwedding@gmail.com.</p>
+        Call +91 9836366899 or email primeeventandwedding@gmail.com.
+        Visit our <a href="/Home/default/services">services</a> or <a href="/Home/default/contact-us">contact page</a>.</p>
     </noscript>
   </app-root>
 </body>

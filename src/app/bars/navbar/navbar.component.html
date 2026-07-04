@@ -4,32 +4,32 @@
         height="60" alt="Prime Event & Wedding"></a>
 
     <nav class="navbar display-none">
-        <div class="m-btn m-btn-nav" [routerLink]="['']">
+        <a class="m-btn m-btn-nav" routerLink="/Home/best-event-organizer" href="/Home/best-event-organizer">
             <span>Home</span>
-        </div>
+        </a>
         <div class="dropdown m-btn-nav">
-            <div class="m-btn m-btn-nav" [routerLink]="['default/services']">
+            <a class="m-btn m-btn-nav" routerLink="/Home/default/services" href="/Home/default/services">
                 <span>Services</span>
-            </div>
+            </a>
             <div class="dropdown-content">
-                <a [routerLink]="['default/wedding-or-anniversary-event']">Wedding/Anniversary</a>
-                <a [routerLink]="['default/engagement-or-ring-ceremony-event']">Engagement/Ring Ceremony</a>
-                <a [routerLink]="['default/birthday-house-party']">Birthday/House Party</a>
-                <a [routerLink]="['default/school-college-event']">School/College Events</a>
-                <a [routerLink]="['default/corporate-or-office-event']">Corporate/Office Event</a>
-                <a [routerLink]="['default/product-launch-event']">Product launch Event</a>
+                <a routerLink="/Home/default/wedding-or-anniversary-event" href="/Home/default/wedding-or-anniversary-event">Wedding/Anniversary</a>
+                <a routerLink="/Home/default/engagement-or-ring-ceremony-event" href="/Home/default/engagement-or-ring-ceremony-event">Engagement/Ring Ceremony</a>
+                <a routerLink="/Home/default/birthday-house-party" href="/Home/default/birthday-house-party">Birthday/House Party</a>
+                <a routerLink="/Home/default/school-college-event" href="/Home/default/school-college-event">School/College Events</a>
+                <a routerLink="/Home/default/corporate-or-office-event" href="/Home/default/corporate-or-office-event">Corporate/Office Event</a>
+                <a routerLink="/Home/default/product-launch-event" href="/Home/default/product-launch-event">Product launch Event</a>
             </div>
         </div>
 
-        <div class="m-btn m-btn-nav" [routerLink]="['default/portfolio']">
+        <a class="m-btn m-btn-nav" routerLink="/Home/default/portfolio" href="/Home/default/portfolio">
             <span>Gallery</span>
-        </div>
-        <div class="m-btn m-btn-nav" [routerLink]="['default/why-primeevent']">
+        </a>
+        <a class="m-btn m-btn-nav" routerLink="/Home/default/why-primeevent" href="/Home/default/why-primeevent">
             <span>Why Us</span>
-        </div>
-        <div class="m-btn m-btn-nav" [routerLink]="['default/about']">
+        </a>
+        <a class="m-btn m-btn-nav" routerLink="/Home/default/about" href="/Home/default/about">
             <span>About</span>
-        </div>
+        </a>
     </nav>
     <button class=" burger  " id="burger " aria-label="Toggle Navigation" (click)="toggleSidePanel()"
         [ngClass]="{'open': sidePanel}">
@@ -60,32 +60,32 @@
 </header>
 <div class="side-bar d-flex flex-column justify-content-start align-item-center" *ngIf="sidePanel">
     <nav class="navbar display-block mx-auto ">
-        <div class="m-btn m-btn-nav  " [routerLink]="['']">
+        <a class="m-btn m-btn-nav" routerLink="/Home/best-event-organizer" href="/Home/best-event-organizer">
             <span>Home</span>
-        </div>
+        </a>
         <div class="dropdown m-btn-nav">
-            <div class="m-btn m-btn-nav" [routerLink]="['default/services']">
+            <a class="m-btn m-btn-nav" routerLink="/Home/default/services" href="/Home/default/services">
                 <span>Services</span>
-            </div>
+            </a>
             <div class="dropdown-content">
-                <a [routerLink]="['default/wedding-or-anniversary-event']">Wedding/Anniversary</a>
-                <a [routerLink]="['default/engagement-or-ring-ceremony-event']">Engagement/Ring ceremony</a>
-                <a [routerLink]="['default/birthday-house-party']">Birthday/House Party</a>
-                <a [routerLink]="['default/school-college-event']">School/College Events</a>
-                <a [routerLink]="['default/corporate-or-office-event']">Corporate/Office Event</a>
-                <a [routerLink]="['default/product-launch-event']">Product launch Event</a>
+                <a routerLink="/Home/default/wedding-or-anniversary-event" href="/Home/default/wedding-or-anniversary-event">Wedding/Anniversary</a>
+                <a routerLink="/Home/default/engagement-or-ring-ceremony-event" href="/Home/default/engagement-or-ring-ceremony-event">Engagement/Ring ceremony</a>
+                <a routerLink="/Home/default/birthday-house-party" href="/Home/default/birthday-house-party">Birthday/House Party</a>
+                <a routerLink="/Home/default/school-college-event" href="/Home/default/school-college-event">School/College Events</a>
+                <a routerLink="/Home/default/corporate-or-office-event" href="/Home/default/corporate-or-office-event">Corporate/Office Event</a>
+                <a routerLink="/Home/default/product-launch-event" href="/Home/default/product-launch-event">Product launch Event</a>
             </div>
         </div>
 
-        <div class="m-btn m-btn-nav" [routerLink]="['default/portfolio']">
+        <a class="m-btn m-btn-nav" routerLink="/Home/default/portfolio" href="/Home/default/portfolio">
             <span>Gallery</span>
-        </div>
-        <div class="m-btn m-btn-nav" [routerLink]="['default/why-primeevent']">
+        </a>
+        <a class="m-btn m-btn-nav" routerLink="/Home/default/why-primeevent" href="/Home/default/why-primeevent">
             <span>Why Us</span>
-        </div>
-        <div class="m-btn m-btn-nav" [routerLink]="['default/about']">
+        </a>
+        <a class="m-btn m-btn-nav" routerLink="/Home/default/about" href="/Home/default/about">
             <span>About</span>
-        </div>
+        </a>
     </nav>
 
 </div>
