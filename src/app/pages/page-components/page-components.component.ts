@@ -11,26 +11,13 @@ export class PageComponentsComponent implements OnInit {
   childPath: string;
   url: string;
   ngOnInit(): void {
-    //  console.log(this._activeRoute.snapshot.firstChild.routeConfig.path);
-    this.basePath = this._activeRoute.routeConfig.path;
-    this.childPath = this._activeRoute.snapshot.firstChild.routeConfig.path
-      .replace('-', ' ')
-      .replace('-', ' ')
-      .replace('-', ' ')
-      .replace('-', ' ')
-      .replace('-', ' ')
-      .replace('-', ' ')
-      .replace('-', ' ');
-    this.route.events.subscribe((x: any) => {
-      this.basePath = this._activeRoute.routeConfig.path;
-      this.childPath = this._activeRoute.snapshot.firstChild.routeConfig.path
-        .replace('-', ' ')
-        .replace('-', ' ')
-        .replace('-', ' ')
-        .replace('-', ' ')
-        .replace('-', ' ')
-        .replace('-', ' ')
-        .replace('-', ' ');
-    });
+    this.updateChildPath();
+    this.route.events.subscribe(() => this.updateChildPath());
+  }
+
+  private updateChildPath(): void {
+    this.basePath = this._activeRoute.routeConfig?.path ?? '';
+    const slug = this._activeRoute.snapshot.firstChild?.routeConfig?.path;
+    this.childPath = slug ? slug.replace(/-/g, ' ') : '';
   }
 }

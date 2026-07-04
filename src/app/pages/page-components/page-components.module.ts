@@ -15,7 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { PrimengModule } from '../../modules/primeng/primeng.module';
 import { ServicesComponent } from './services/services.component';
 import { ContactUsComponent } from '../../bars/contact-us/contact-us.component';
-import { ClientReviewModule } from '../../client-review-form/client-review.module';
+import { ClientReviewFormModule } from '../../client-review-form/client-review-form.module';
 import { ClientReviewFormComponent } from '../../client-review-form/client-review-form.component';
 
 const routes: Routes = [
@@ -56,6 +56,6 @@ const routes: Routes = [
     AboutComponent,
     LocalSeoPageComponent,
   ],
-  imports: [SharedModule, ClientReviewModule, PrimengModule, RouterModule.forChild(routes)],
+  imports: [SharedModule, ClientReviewFormModule, PrimengModule, RouterModule.forChild(routes)],
 })
 export class PageComponentsModule {}
