@@ -1,7 +1,7 @@
 # Joins shared edge nginx on Docker network `web` (hosting repo).
 #
 # Prerequisite — start hosting stack first (creates network `web`):
-#   cd ~/hosting && docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#   cd ~/hosting && docker compose up -d
 #
 # Deploy (production):
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
