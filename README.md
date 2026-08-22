@@ -78,6 +78,22 @@ Or visit the [Angular CLI Overview and Command Reference](https://angular.io/cli
 
 ---
 
+## Production deploy
+
+Requires the **hosting** router on the VPS (network `web`). Push or merge to `master` → CI/CD rsyncs and runs `scripts/deploy.sh`.
+
+| Secret | Required |
+|--------|----------|
+| `PROD_SSH_HOST` | Yes |
+| `PROD_SSH_PRIVATE_KEY` | Yes |
+| `PROD_SSH_USER` | No (default `deploy`) |
+| `PROD_SSH_PASSPHRASE` | Only if key is encrypted |
+| `PROD_APP_DIR` | No (default `~/prime-event-wedding-angular`) |
+
+Local standalone: `docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build` → http://localhost:8082
+
+---
+
 ## License
 
 This project is for portfolio and inspiration only.  

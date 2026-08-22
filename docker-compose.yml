@@ -1,13 +1,16 @@
-# Joins Portfolio edge nginx on shared Docker network `web`.
+# Joins shared edge nginx on Docker network `web` (hosting repo).
 #
-# Prerequisite — start Portfolio stack first (creates network `web`):
-#   cd ~/abhishek-das-portfolio
-#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# Prerequisite — start hosting stack first (creates network `web`):
+#   cd ~/hosting && docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 #
-# Deploy:
-#   docker compose up -d --build
+# Deploy (production):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 #
-# Edge routing: Portfolio/docker/nginx/conf.d/primeevent.conf
+# Local dev (standalone — no hosting router):
+#   docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+#   → http://localhost:8082
+#
+# Edge routing: hosting/nginx/conf.d/primeevent.conf
 
 services:
   prime-event-wedding:

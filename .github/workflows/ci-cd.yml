@@ -1,0 +1,119 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: primeevent-ci-cd-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build:prod
+
+  deploy:
+    name: Deploy to VPS
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+      PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+      PROD_SSH_PRIVATE_KEY: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
+      PROD_SSH_PASSPHRASE: ${{ secrets.PROD_SSH_PASSPHRASE }}
+      PROD_APP_DIR: ${{ secrets.PROD_APP_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        run: |
+          set -euo pipefail
+
+          test -n "${PROD_SSH_HOST}"
+          test -n "${PROD_SSH_PRIVATE_KEY}"
+
+          REMOTE_USER="${PROD_SSH_USER:-deploy}"
+          KEY_FILE="$HOME/.ssh/primeevent_prod"
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          python3 - "$KEY_FILE" <<'PY'
+          import os
+          import sys
+          from pathlib import Path
+
+          dest = Path(sys.argv[1])
+          key = os.environ["PROD_SSH_PRIVATE_KEY"].replace("\r\n", "\n").replace("\r", "\n")
+          if "\\n" in key and "BEGIN " in key and "\n-----" not in key:
+              key = key.replace("\\n", "\n")
+          if not key.endswith("\n"):
+              key += "\n"
+          dest.write_text(key)
+          dest.chmod(0o600)
+          PY
+
+          if ! ssh-keygen -y -f "$KEY_FILE" >/dev/null 2>/tmp/keyerr; then
+            if grep -qi passphrase /tmp/keyerr; then
+              test -n "${PROD_SSH_PASSPHRASE:-}"
+              ssh-keygen -p -P "$PROD_SSH_PASSPHRASE" -N "" -f "$KEY_FILE"
+            else
+              cat /tmp/keyerr
+              exit 1
+            fi
+          fi
+
+          ssh-keyscan -H "$PROD_SSH_HOST" >> ~/.ssh/known_hosts
+
+          SSH_CMD="ssh -i ${KEY_FILE} -o IdentitiesOnly=yes -o BatchMode=yes -o PreferredAuthentications=publickey -o PasswordAuthentication=no -o StrictHostKeyChecking=yes"
+
+          if [ -n "${PROD_APP_DIR:-}" ]; then
+            REMOTE_DIR="$PROD_APP_DIR"
+          else
+            REMOTE_DIR="$(${SSH_CMD} "${REMOTE_USER}@${PROD_SSH_HOST}" 'printf "%s/prime-event-wedding-angular" "$HOME"')"
+          fi
+
+          echo "Deploy target: ${REMOTE_USER}@${PROD_SSH_HOST}:${REMOTE_DIR}"
+
+          ${SSH_CMD} "${REMOTE_USER}@${PROD_SSH_HOST}" "mkdir -p '${REMOTE_DIR}'"
+
+          rsync -az --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'node_modules/' \
+            --exclude 'dist/' \
+            -e "${SSH_CMD}" \
+            ./ "${REMOTE_USER}@${PROD_SSH_HOST}:${REMOTE_DIR}/"
+
+          ${SSH_CMD} "${REMOTE_USER}@${PROD_SSH_HOST}" "bash -s" <<EOF
+          set -euo pipefail
+          APP_DIR='${REMOTE_DIR}'
+          cd "\$APP_DIR"
+          bash scripts/deploy.sh
+          docker run --rm --network web curlimages/curl:8.5.0 -sf "http://prime-event-wedding:80/" >/dev/null
+          echo "Deploy complete at \${APP_DIR}"
+          EOF
