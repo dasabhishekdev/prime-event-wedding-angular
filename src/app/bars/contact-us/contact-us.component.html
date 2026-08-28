@@ -1,7 +1,7 @@
 <div class="container">
   <div class="text-start my-4">
-    <h5 class="section-title">Connect with US</h5>
-    <h2 class="text-1 ">Drop us a Message</h2>
+    <h2 class="section-title">Connect with US</h2>
+    <h3 class="text-1 ">Drop us a Message</h3>
   </div>
 
   <form (ngSubmit)=" form.valid && onSubmit(form)" #form="ngForm" class="row">
@@ -26,7 +26,7 @@
     </div>
     <div class="mb-3  form-input col-sm-6">
       <label for="selector" class="form-label">Event type</label>
-      <div class="custom-select" style="width:200px;">
+      <div class="custom-select w-100">
         <select #event_type="ngModel" name="event_type" [(ngModel)]="formData.event_type">
           <option value="Others">Others</option>
           <option value="Wedding">Wedding</option>
@@ -53,8 +53,8 @@
     </div>
   </form>
   <div class="text-start my-4">
-    <h5 class="section-title">Contact</h5>
-    <h2 class="text-1 ">Our contact details</h2>
+    <h2 class="section-title">Contact</h2>
+    <h3 class="text-1 ">Our contact details</h3>
   </div>
   <div class="row">
     <div class="col-sm-4 d-flex justify-content-start align-items-center">
@@ -70,7 +70,7 @@
             <fa-icon [icon]="mail"></fa-icon> Business email:
           </h6>
           <p class="text-3 ml-3"><a class="text-4"
-              href="primeeventandwedding@gmail.com">primeeventandwedding@gmail.com</a></p>
+              href="primeeventandwedding@gmail.com">primeeventandwedding&#64;gmail.com</a></p>
         </div>
         <div class="phone my-3">
           <i class="bi bi-phone"></i>

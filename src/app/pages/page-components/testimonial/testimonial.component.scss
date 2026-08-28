@@ -1,4 +1,15 @@
-.checked {
-  color: rgb(255, 217, 0);
-  font-size: 1.5rem;
+:host {
+  display: block;
+}
+
+.text-quotes {
+  width: 100%;
+  max-width: 42rem;
+  padding: 0 16px;
+}
+
+@media (max-width: 767px) {
+  .testimonials-slide img {
+    width: min(80%, 280px);
+  }
 }

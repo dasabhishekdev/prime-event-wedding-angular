@@ -2,12 +2,13 @@ $color-primary: #ca9a14;
 .footer-top {
   .logo {
     img {
-      width: 100%;
+      width: min(100%, 120px);
+      height: auto;
     }
   }
   background-color: #fff3d1ef;
-  padding: 1rem;
-  padding-top: 3rem;
+  padding: 24px 16px;
+  padding-top: 48px;
   strong {
     color: $color-primary;
   }
@@ -22,6 +23,12 @@ $color-primary: #ca9a14;
   }
   .footer-links {
     margin: 0;
+
+    &__heading {
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+      margin-bottom: 0.75rem;
+    }
+
     ul {
       list-style: none;
       margin: 0;
@@ -36,12 +43,21 @@ $color-primary: #ca9a14;
         a {
           text-decoration: none;
           color: $color-primary;
-          font-size: max(0.9vw, 0.9rem);
+          font-size: var(--text-sm, 0.875rem);
+          line-height: var(--leading-normal, 1.5);
         }
       }
     }
   }
 }
+
+@media (min-width: 768px) {
+  .footer-top {
+    padding: 32px 24px;
+    padding-top: 48px;
+  }
+}
+
 .fas {
   margin-right: 7px;
 }

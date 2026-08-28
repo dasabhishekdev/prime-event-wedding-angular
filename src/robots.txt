@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /admin/
 Disallow: /client-review
+Disallow: /Home/default/feedback
 
 Sitemap: https://www.primeeventandwedding.co.in/sitemap.xml

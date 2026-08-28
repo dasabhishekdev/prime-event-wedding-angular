@@ -2,10 +2,10 @@
     <div class="container mx-auto p-3">
 
         <div *ngIf="imageUrls.length">
-            <h5 class="section-title">Our work</h5>
-            <h2 class="text-1 ">Gallery</h2>
+            <h2 class="section-title">Our work</h2>
+            <h3 class="text-1 ">Gallery</h3>
             <div class="row">
-                <div class="col-md-3 mt-md-0" *ngFor="let item of imageUrls">
+                <div class="col-6 col-md-4 col-lg-3 mt-3 mt-md-0" *ngFor="let item of imageUrls">
                     <div class="gallery-img">
                         <img src="{{item.img_url}}" alt="Event gallery photo by Prime Event & Wedding" loading="lazy" width="400" height="300">
                         <i style="color: white;" class="pi pi-search" (click)="onSwitchModal(item.img_url)"></i>

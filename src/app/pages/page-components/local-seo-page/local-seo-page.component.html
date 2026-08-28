@@ -1,26 +1,20 @@
-<div class="container min-height py-4">
-  <nav aria-label="Breadcrumb" class="mb-3">
-    <a routerLink="/Home/best-event-organizer" href="/Home/best-event-organizer">Home</a>
-    / {{ content.h1 }}
-  </nav>
+<div class="local-seo-content">
+  <p class="text-4 lead-copy mb-4">{{ content.intro }}</p>
 
-  <h1 class="text-1 mb-3">{{ content.h1 }}</h1>
-  <p class="text-4 mb-4">{{ content.intro }}</p>
-
-  <section *ngFor="let section of content.sections" class="mb-4">
-    <h2 class="text-2 mb-2">{{ section.heading }}</h2>
+  <section *ngFor="let section of content.sections" class="content-section mb-4">
+    <h2 class="text-2 section-heading mb-2">{{ section.heading }}</h2>
     <p class="text-4">{{ section.body }}</p>
   </section>
 
-  <section class="mb-4">
-    <h2 class="text-2 mb-3">How Prime Event & Wedding compares</h2>
-    <div class="table-responsive">
-      <table class="table table-bordered">
+  <section class="content-section mb-4">
+    <h2 class="text-2 section-heading mb-3">How Prime Event & Wedding compares</h2>
+    <div class="table-responsive comparison-table">
+      <table class="table table-bordered mb-0">
         <thead>
           <tr>
-            <th>Feature</th>
-            <th>Prime Event & Wedding</th>
-            <th>Typical provider</th>
+            <th scope="col">Feature</th>
+            <th scope="col">Prime Event & Wedding</th>
+            <th scope="col">Typical provider</th>
           </tr>
         </thead>
         <tbody>
@@ -34,20 +28,23 @@
     </div>
   </section>
 
-  <section class="mb-4">
-    <h2 class="text-2 mb-3">Frequently asked questions</h2>
-    <div *ngFor="let faq of content.faqs" class="mb-3">
-      <h3 class="text-3">{{ faq.question }}</h3>
-      <p class="text-4">{{ faq.answer }}</p>
+  <section class="content-section mb-4">
+    <h2 class="text-2 section-heading mb-3">Frequently asked questions</h2>
+    <div *ngFor="let faq of content.faqs" class="faq-item mb-3">
+      <h3 class="text-3 faq-question">{{ faq.question }}</h3>
+      <p class="text-4 mb-0">{{ faq.answer }}</p>
     </div>
   </section>
 
-  <section class="mb-5">
-    <h2 class="text-2 mb-2">Plan your event in Kolkata</h2>
+  <section class="content-section cta-section mb-2">
+    <h2 class="text-2 section-heading mb-2">Plan your event in Kolkata</h2>
     <p class="text-4 mb-3">
-      Contact Prime Event & Wedding for wedding, corporate, and celebration planning across Kolkata.
+      Contact Prime Event & Wedding for wedding, corporate, and celebration planning across Kolkata and West Bengal.
+      Call +91 9836366899 or send us a message for a custom quote.
     </p>
-    <a class="m-btn-mid" routerLink="/Home/default/contact-us" href="/Home/default/contact-us">Get in touch</a>
-    <a class="m-btn-mid ms-2" routerLink="/Home/default/services" href="/Home/default/services">View services</a>
+    <div class="d-flex flex-wrap gap-2">
+      <a class="m-btn-mid" routerLink="/Home/default/contact-us" href="/Home/default/contact-us">Get in touch</a>
+      <a class="m-btn-mid btn-outline" routerLink="/Home/default/services" href="/Home/default/services">View services</a>
+    </div>
   </section>
 </div>

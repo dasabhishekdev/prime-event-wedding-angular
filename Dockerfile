@@ -1,6 +1,6 @@
-# Builds Angular and serves static files on port 80 (internal only).
+# Builds Angular SSR bundle and runs Express on port 80 (internal only).
 # Public routing + SSL: Portfolio/docker/nginx/conf.d/primeevent.conf
-FROM node:16-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -8,16 +8,23 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build:prod
+RUN npm run build:ssr
 
-FROM nginx:1.27-alpine
+FROM node:20-alpine
 
-COPY docker/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist/prime-event-app /usr/share/nginx/html
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=80
+
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+COPY --from=build /app/dist ./dist
 
 EXPOSE 80
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
   CMD wget -qO- http://127.0.0.1/ > /dev/null || exit 1
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "dist/prime-event-app/server/main.js"]

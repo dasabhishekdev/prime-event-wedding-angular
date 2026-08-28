@@ -1,36 +1,22 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LocalSeoContent } from '../config/local-seo.config';
-import { pageSeo, siteConfig } from '../config/site.config';
-
-const BREADCRUMB_LABELS: Record<string, string> = {
-  services: 'Services',
-  'contact-us': 'Contact Us',
-  'why-primeevent': 'Why Choose Us',
-  'wedding-or-anniversary-event': 'Wedding & Anniversary',
-  'engagement-or-ring-ceremony-event': 'Engagement & Ring Ceremony',
-  'birthday-house-party': 'Birthday & House Party',
-  'school-college-event': 'School & College Fest',
-  'corporate-or-office-event': 'Corporate Events',
-  'product-launch-event': 'Product Launch',
-  portfolio: 'Gallery',
-  about: 'About Us',
-  feedback: 'Feedback',
-  'best-wedding-planners-kolkata': 'Best Wedding Planners Kolkata',
-  'wedding-planning-kolkata': 'Wedding Planning Kolkata',
-  'event-management-companies-kolkata': 'Event Management Kolkata',
-};
+import { getBreadcrumbLabel } from '../config/breadcrumb.config';
+import { pageSeo, siteConfig, PageSeo } from '../config/site.config';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly jsonLdId = 'prime-event-jsonld';
+  private readonly faqJsonLdId = 'prime-event-faq-jsonld';
 
   constructor(
     private readonly title: Title,
     private readonly meta: Meta,
-    private readonly router: Router
+    private readonly router: Router,
+    @Inject(DOCUMENT) private readonly document: Document
   ) {}
 
   init(): void {
@@ -56,28 +42,42 @@ export class SeoService {
   }
 
   private updateFromRoute(): void {
-    const url = this.router.url.split('?')[0];
+    const url = this.normalizePath(this.router.url);
     const isPrivateRoute =
       url.startsWith('/admin') || url.startsWith('/client-review');
 
     if (isPrivateRoute) {
+      this.clearFaqSchema();
       this.setMeta('robots', 'noindex, nofollow');
       return;
     }
 
     if (url.includes('/feedback')) {
+      this.clearFaqSchema();
       this.setMeta('robots', 'noindex, follow');
       const seo = pageSeo['feedback'];
       this.applySeo(seo.title, seo.description, seo.path);
       return;
     }
 
-    const match = Object.values(pageSeo).find((entry) => url.includes(entry.path));
-    const seo = match ?? pageSeo['home'];
+    const seo = this.findSeoForUrl(url);
     this.applySeo(seo.title, seo.description, seo.path);
   }
 
+  private normalizePath(url: string): string {
+    const path = url.split('?')[0].split('#')[0];
+    return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+  }
+
+  /** Longest-path-first exact match to avoid false positives. */
+  private findSeoForUrl(url: string): PageSeo {
+    const entries = Object.values(pageSeo).sort((a, b) => b.path.length - a.path.length);
+    return entries.find((entry) => url === entry.path) ?? pageSeo['home'];
+  }
+
   private applySeo(pageTitle: string, description: string, path: string): void {
+    this.clearFaqSchema();
+
     this.title.setTitle(pageTitle);
     this.setMeta('description', description);
     this.setMeta('keywords', siteConfig.keywords.join(', '));
@@ -102,7 +102,7 @@ export class SeoService {
     this.setMeta('twitter:description', description);
     this.setMeta('twitter:image', `${siteConfig.url}${siteConfig.ogImage}`);
 
-    this.injectStructuredData(path);
+    this.injectStructuredData(pageTitle, description, path);
   }
 
   private setMeta(name: string, content: string, isProperty = false): void {
@@ -115,13 +115,17 @@ export class SeoService {
   }
 
   private setLink(rel: string, href: string): void {
-    let link = document.querySelector(`link[rel='${rel}']`) as HTMLLinkElement | null;
+    let link = this.document.querySelector(`link[rel='${rel}']`) as HTMLLinkElement | null;
     if (!link) {
-      link = document.createElement('link');
+      link = this.document.createElement('link');
       link.rel = rel;
-      document.head.appendChild(link);
+      this.document.head.appendChild(link);
     }
     link.href = href;
+  }
+
+  private clearFaqSchema(): void {
+    this.document.getElementById(this.faqJsonLdId)?.remove();
   }
 
   private injectFaqSchema(faqs: Array<{ question: string; answer: string }>): void {
@@ -135,29 +139,36 @@ export class SeoService {
       })),
     };
 
-    let script = document.getElementById('prime-event-faq-jsonld') as HTMLScriptElement | null;
+    let script = this.document.getElementById(this.faqJsonLdId) as HTMLScriptElement | null;
     if (!script) {
-      script = document.createElement('script');
-      script.id = 'prime-event-faq-jsonld';
+      script = this.document.createElement('script');
+      script.id = this.faqJsonLdId;
       script.type = 'application/ld+json';
-      document.head.appendChild(script);
+      this.document.head.appendChild(script);
     }
     script.textContent = JSON.stringify(schema);
   }
 
-  private injectStructuredData(path: string): void {
+  private injectStructuredData(pageTitle: string, description: string, path: string): void {
+    const pageUrl = `${siteConfig.url}${path}`;
+    const orgId = `${siteConfig.url}/#organization`;
+    const websiteId = `${siteConfig.url}/#website`;
+
     const schema = {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': 'WebSite',
+          '@id': websiteId,
           name: siteConfig.name,
           url: siteConfig.url,
           description: siteConfig.defaultDescription,
           inLanguage: 'en-IN',
+          publisher: { '@id': orgId },
         },
         {
           '@type': ['EventPlanner', 'LocalBusiness'],
+          '@id': orgId,
           name: siteConfig.name,
           description: siteConfig.defaultDescription,
           url: siteConfig.url,
@@ -196,18 +207,28 @@ export class SeoService {
           ],
         },
         {
+          '@type': 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: pageTitle,
+          description,
+          isPartOf: { '@id': websiteId },
+          about: { '@id': orgId },
+          inLanguage: 'en-IN',
+        },
+        {
           '@type': 'BreadcrumbList',
           itemListElement: this.buildBreadcrumbs(path),
         },
       ],
     };
 
-    let script = document.getElementById(this.jsonLdId) as HTMLScriptElement | null;
+    let script = this.document.getElementById(this.jsonLdId) as HTMLScriptElement | null;
     if (!script) {
-      script = document.createElement('script');
+      script = this.document.createElement('script');
       script.id = this.jsonLdId;
       script.type = 'application/ld+json';
-      document.head.appendChild(script);
+      this.document.head.appendChild(script);
     }
     script.textContent = JSON.stringify(schema);
   }
@@ -228,7 +249,7 @@ export class SeoService {
     }
 
     const slug = segments[segments.length - 1];
-    const label = BREADCRUMB_LABELS[slug] ?? slug.replace(/-/g, ' ');
+    const label = getBreadcrumbLabel(slug);
     crumbs.push({
       '@type': 'ListItem',
       position: 2,

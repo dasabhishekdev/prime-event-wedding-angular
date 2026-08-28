@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -7,14 +8,19 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private readonly platformId: object
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (!(event instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0);
+      if (isPlatformBrowser(this.platformId)) {
+        window.scrollTo(0, 0);
+      }
     });
   }
 }

@@ -1,8 +1,8 @@
 <div class="container-fluid align-item-center">
 
   <div class="w-100 ">
-    <swiper #swiper [loop]="true" [navigation]="true" [pagination]="{ clickable: true }"
-      direction="horizontal" (slideChange)="onSlide()">
+    <swiper #heroSwiper [config]="heroConfig" direction="horizontal"
+      (slideChange)="onSlide()" (afterInit)="onHeroInit($event)">
       <ng-template swiperSlide>
         <div class="slider container-fluid d-flex justify-content-center">
           <picture class="slide-img">
@@ -14,7 +14,7 @@
             <div class="text-center mx-2">
               <a class="logo" href="/Home/best-event-organizer"><img data-aos="fade-down"
                   data-aos-anchor-placement="top-bottom" data-aos-duration="2000" src="assets/marks/logo.png"
-                  width="288" height="288" alt="Prime Event & Wedding logo"></a>
+                  width="384" height="384" alt="Prime Event & Wedding logo"></a>
               <h1 data-aos="fade-up" data-aos-duration="2000" class="text-3 mx-4">Happily ever after is not a fairy
                 tale.
                 It’s a choice</h1>
@@ -27,13 +27,15 @@
       </ng-template>
       <ng-template swiperSlide>
         <div class="slider container-fluid d-flex justify-content-center">
-          <img class="slide-img__photo" src="assets/images/hero_images/hero2.jpg" width="1920" height="1080"
-            loading="lazy" alt="Birthday and party event by Prime Event & Wedding">
+          <picture class="slide-img">
+            <img src="assets/images/hero_images/hero2.jpg" width="1920" height="1080" loading="lazy"
+              alt="Birthday and party event by Prime Event & Wedding" class="slide-img__photo">
+          </picture>
           <div class="hero-text container align-self-center">
             <div class="text-center mx-2">
               <a class="logo" href="/Home/best-event-organizer"><img data-aos="fade-up"
                   data-aos-anchor-placement="top-bottom" data-aos-duration="2000" src="assets/marks/logo.png"
-                  width="288" height="288" alt="Prime Event & Wedding logo"></a>
+                  width="384" height="384" alt="Prime Event & Wedding logo"></a>
               <h2 data-aos="fade-up" data-aos-duration="2000" class="text-3 mx-4">A party without cake just a meeting
               </h2>
               <p data-aos="fade-up" data-aos-duration="2500" class="text-4 mx-5"> Prime event and wedding add spices in
@@ -45,13 +47,15 @@
       </ng-template>
       <ng-template swiperSlide>
         <div class="slider container-fluid d-flex justify-content-center">
-          <img class="slide-img__photo" src="assets/images/hero_images/hero3.jpg" width="1920" height="1080"
-            loading="lazy" alt="Engagement ceremony event planning Kolkata">
+          <picture class="slide-img">
+            <img src="assets/images/hero_images/hero3.jpg" width="1920" height="1080" loading="lazy"
+              alt="Engagement ceremony event planning Kolkata" class="slide-img__photo">
+          </picture>
           <div class="hero-text container align-self-center">
             <div class="text-center mx-2">
               <a class="logo" href="/Home/best-event-organizer"><img data-aos="fade-up"
                   data-aos-anchor-placement="top-bottom" data-aos-duration="2000" src="assets/marks/logo.png"
-                  width="288" height="288" alt="Prime Event & Wedding logo"></a>
+                  width="384" height="384" alt="Prime Event & Wedding logo"></a>
               <h2 data-aos="fade-up" data-aos-duration="2000" class="text-3 mx-4">You come to love not by finding the
                 perfect person, but by seeing an imperfect person perfectly</h2>
               <p data-aos="fade-up" data-aos-duration="2500" class="text-4 mx-5">Have a happy engagement and ring
@@ -63,12 +67,14 @@
       </ng-template>
       <ng-template swiperSlide>
         <div class="slider container-fluid d-flex justify-content-center">
-          <img class="slide-img__photo" src="assets/images/hero_images/hero4.jpg" width="1920" height="1080"
-            loading="lazy" alt="Corporate and celebration events Kolkata">
+          <picture class="slide-img">
+            <img src="assets/images/hero_images/hero4.jpg" width="1920" height="1080" loading="lazy"
+              alt="Corporate and celebration events Kolkata" class="slide-img__photo">
+          </picture>
           <div class="hero-text container align-self-center">
             <div class="text-center mx-2">
               <a class="logo" href="/Home/best-event-organizer"><img data-aos="fade-down" data-aos-easing="linear"
-                  data-aos-duration="1500" src="assets/marks/logo.png" width="288" height="288"
+                  data-aos-duration="1500" src="assets/marks/logo.png" width="384" height="384"
                   alt="Prime Event & Wedding logo"></a>
               <h2 data-aos="fade-up" data-aos-duration="2000" class="text-3 mx-4">An extraordinary event is always to
                 remember</h2>
@@ -80,12 +86,14 @@
       </ng-template>
       <ng-template swiperSlide>
         <div class="slider container-fluid d-flex justify-content-center">
-          <img class="slide-img__photo" src="assets/images/hero_images/hero5.jpg" width="1920" height="1080"
-            loading="lazy" alt="Product launch event management Kolkata">
+          <picture class="slide-img">
+            <img src="assets/images/hero_images/hero5.jpg" width="1920" height="1080" loading="lazy"
+              alt="Product launch event management Kolkata" class="slide-img__photo">
+          </picture>
           <div class="hero-text container align-self-center">
             <div class="text-center mx-2">
               <a class="logo" href="/Home/best-event-organizer"><img data-aos="fade-down" data-aos-easing="linear"
-                  data-aos-duration="1500" src="assets/marks/logo.png" width="288" height="288"
+                  data-aos-duration="1500" src="assets/marks/logo.png" width="384" height="384"
                   alt="Prime Event & Wedding logo"></a>
               <h2 data-aos="fade-up" data-aos-duration="2000" class="text-3 mx-4">Productivity is never an accident</h2>
               <p data-aos="fade-up" data-aos-duration="2500" class="text-4 mx-5">There are some people who live in a

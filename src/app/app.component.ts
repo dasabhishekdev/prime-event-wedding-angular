@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import * as AOS from 'aos';
 import { SeoService } from './services/seo.service';
 
@@ -10,11 +11,17 @@ import { SeoService } from './services/seo.service';
 export class AppComponent implements OnInit {
   title = 'prime-event-and-wedding';
 
-  constructor(private readonly seo: SeoService) {}
+  constructor(
+    private readonly seo: SeoService,
+    @Inject(PLATFORM_ID) private readonly platformId: object
+  ) {}
 
   ngOnInit(): void {
     this.seo.init();
-    this.initAosWhenIdle();
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.initAosWhenIdle();
+    }
   }
 
   private initAosWhenIdle(): void {

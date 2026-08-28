@@ -10,6 +10,7 @@ import { ContactUsComponent } from '../bars/contact-us/contact-us.component';
 import { ServicesComponent } from '../pages/page-components/services/services.component';
 import { TestimonialComponent } from '../pages/page-components/testimonial/testimonial.component';
 import { ReviewsComponent } from '../pages/page-components/reviews/reviews.component';
+import { ImageLoadDirective } from './directives/image-load.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReviewsComponent } from '../pages/page-components/reviews/reviews.compo
     ServicesComponent,
     TestimonialComponent,
     ReviewsComponent,
+    ImageLoadDirective,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SwiperModule, FontAwesomeModule],
   exports: [
@@ -34,6 +36,7 @@ import { ReviewsComponent } from '../pages/page-components/reviews/reviews.compo
     ServicesComponent,
     TestimonialComponent,
     ReviewsComponent,
+    ImageLoadDirective,
   ],
 })
 export class SharedModule {}

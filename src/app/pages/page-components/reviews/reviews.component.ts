@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SwiperComponent } from 'swiper/angular';
-
-// import Swiper core and required components
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import SwiperCore, {
   Navigation,
   Pagination,
@@ -13,7 +11,7 @@ import SwiperCore, {
   Thumbs,
   Controller,
 } from 'swiper';
-import { BehaviorSubject } from 'rxjs';
+
 SwiperCore.use([
   Navigation,
   Pagination,
@@ -25,6 +23,7 @@ SwiperCore.use([
   Thumbs,
   Controller,
 ]);
+
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
@@ -32,7 +31,14 @@ SwiperCore.use([
 })
 export class ReviewsComponent implements OnInit {
   today = new Date();
-  constructor() {}
+
+  reviewBreakpoints = {
+    320: { slidesPerView: 1, spaceBetween: 16 },
+    768: { slidesPerView: 2, spaceBetween: 20 },
+    1024: { slidesPerView: 3, spaceBetween: 24 },
+  };
+
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   ngOnInit(): void {}
 }

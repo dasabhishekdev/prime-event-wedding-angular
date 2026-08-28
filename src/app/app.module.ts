@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ToastrModule } from 'ngx-toastr';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { PagesComponent } from './pages/pages.component';
@@ -17,8 +19,19 @@ import { PrimengModule } from './modules/primeng/primeng.module';
     AppRoutingModule,
     SharedModule,
     PrimengModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
+  ],
+  providers: [
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: false,
+        },
+      },
+    }),
   ],
   bootstrap: [AppComponent],
 })

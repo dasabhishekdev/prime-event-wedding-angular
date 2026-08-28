@@ -1,0 +1,60 @@
+.lead-copy {
+  font-size: var(--text-base, 1rem);
+  line-height: var(--leading-relaxed, 1.75);
+  max-width: 52rem;
+}
+
+.section-heading {
+  color: #3d454c;
+  font-family: "Great Vibes", "Merienda", cursive;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  line-height: var(--leading-tight, 1.25);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.content-section {
+  max-width: 52rem;
+}
+
+.comparison-table {
+  border: 1px solid rgba(202, 154, 20, 0.35);
+  border-radius: 6px;
+  overflow: hidden;
+
+  th {
+    background: #fff3d1;
+    color: #3d454c;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-size: var(--text-sm, 0.875rem);
+  }
+
+  td {
+    font-family: "Poppins", system-ui, sans-serif;
+    font-size: var(--text-sm, 0.875rem);
+    vertical-align: middle;
+  }
+}
+
+.faq-question {
+  font-size: var(--text-base, 1rem);
+  line-height: var(--leading-snug, 1.375);
+  margin-bottom: 0.35rem;
+}
+
+.cta-section .btn-outline {
+  background: transparent;
+  color: #ca9a14;
+  border: 2px solid #ca9a14;
+
+  &:after,
+  &:before {
+    display: none;
+  }
+
+  &:hover {
+    background: #ca9a14;
+    color: #fff;
+  }
+}

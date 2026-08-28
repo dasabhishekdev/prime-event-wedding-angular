@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getBreadcrumbLabel } from '../../config/breadcrumb.config';
+
 @Component({
   selector: 'app-page-components',
   templateUrl: './page-components.component.html',
   styleUrls: ['./page-components.component.scss'],
 })
 export class PageComponentsComponent implements OnInit {
+  pageTitle = '';
+
   constructor(private _activeRoute: ActivatedRoute, private route: Router) {}
-  basePath: string;
-  childPath: string;
-  url: string;
+
   ngOnInit(): void {
-    this.updateChildPath();
-    this.route.events.subscribe(() => this.updateChildPath());
+    this.updatePageTitle();
+    this.route.events.subscribe(() => this.updatePageTitle());
   }
 
-  private updateChildPath(): void {
-    this.basePath = this._activeRoute.routeConfig?.path ?? '';
-    const slug = this._activeRoute.snapshot.firstChild?.routeConfig?.path;
-    this.childPath = slug ? slug.replace(/-/g, ' ') : '';
+  private updatePageTitle(): void {
+    const slug = this._activeRoute.snapshot.firstChild?.routeConfig?.path ?? '';
+    this.pageTitle = getBreadcrumbLabel(slug);
   }
 }

@@ -17,7 +17,7 @@ export const localSeoPages: Record<string, LocalSeoContent> = {
     path: '/Home/default/best-wedding-planners-kolkata',
     h1: 'Best Wedding Planners in Kolkata',
     intro:
-      'Choosing among wedding planners in Kolkata means balancing experience, vendor networks, and how well a team understands your vision. Prime Event & Wedding has planned hundreds of weddings and celebrations across West Bengal with end-to-end coordination — from engagement to reception.',
+      'Choosing among wedding planners in Kolkata means balancing experience, vendor networks, and how well a team understands your vision. Prime Event & Wedding has planned hundreds of weddings and celebrations across West Bengal — from Ultadanga to Salt Lake, New Town, and destination venues — with end-to-end coordination from engagement to reception.',
     sections: [
       {
         heading: 'What makes a great wedding planner in Kolkata',
@@ -30,9 +30,9 @@ export const localSeoPages: Record<string, LocalSeoContent> = {
           'Our packages cover haldi, sangeet, wedding day, and reception events. We work with families across budgets — from intimate gatherings to large destination-style celebrations in Kolkata and nearby cities.',
       },
       {
-        heading: 'Why families choose Prime Event & Wedding',
+        heading: 'Areas we serve in and around Kolkata',
         body:
-          'With a decade of experience, transparent communication, and a portfolio of weddings, corporate events, and engagement ceremonies, we focus on personalized planning rather than one-size-fits-all templates.',
+          'We plan events across Kolkata — including Ultadanga, Salt Lake, New Town, Park Street, and Howrah — as well as destination weddings across India. Local venue knowledge helps us recommend the right banquet halls, heritage properties, and outdoor locations for your guest list and budget.',
       },
     ],
     comparisonRows: [

@@ -1,32 +1,16 @@
 <div class=" ">
-    <p class="text-4">
-        <strong class="h3">Prime Event & Wedding understand the relevance </strong> of different rituals of a
-        Wedding. We have been
-        in the business
-        of
-        organizing the most extravagant and lovely weddings for year. The team of the company knows what the client
-        wants and
-        has been working tirelessly at creating that perfect experience for them. We assure you that every penny spent
-        on us is
-        worth it.
-        <br>
-        It is a full-service organization that takes care of all things you need related to weddings. Whether it’s a
-        caterer,
-        decoration, lightning, a dance performance, the venue, or even the gifts you can leave all of this to us. We
-        work
-        closely with you & your family to develop a wedding that is uniquely yours, reflecting your personality and
-        individual
-        taste. Whether you wish for a small and intimate affair, a large-scale royal production, or an exotic island
-        wedding, a
-        big fat Bollywood wedding we will make your event special and memorable and most importantly your-day-your-way!
-        <br>
-        We offer our very own professional photography. So, you don’t need to worry about your expenses on hiring one. A
-        wedding
-        take care of by us always brings a smile to the faces of many.
-
+    <p class="text-4 lead-intro">
+        <strong>Prime Event & Wedding</strong> understands the significance of every wedding ritual and family tradition.
+        For over a decade, we have planned weddings and anniversary celebrations across Kolkata — from intimate
+        ceremonies to large destination-style receptions.
     </p>
-    <h5 class=" section-title">Our Event Planner</h5>
-    <h2 class="text-1 ">We know the value of love</h2>
+    <p class="text-4">
+        As a full-service wedding planner in Kolkata, we manage decor, catering, venue coordination, artist booking,
+        photography, and guest hospitality. Whether you envision a small gathering, a royal celebration, or a
+        destination wedding, our team works closely with your family to deliver a personalized, stress-free experience.
+    </p>
+    <h2 class="section-title">Our Event Planner</h2>
+    <h3 class="text-1">We know the value of love</h3>
     <div class="row">
         <div class="text-start col-sm-6">
             <div class="icon-box">
@@ -132,10 +116,10 @@
 
     </div>
     <div>
-        <h5 class="section-title">Our work</h5>
-        <h2 class="text-1 ">Gallery</h2>
+        <h2 class="section-title">Our work</h2>
+        <h3 class="text-1 ">Gallery</h3>
         <div class="row">
-            <div class="col-md-3 mt-md-0" *ngFor="let item of imageUrls">
+            <div class="col-6 col-md-4 col-lg-3 mt-3 mt-md-0" *ngFor="let item of imageUrls">
                 <div class="gallery-img">
                     <img src="{{item.img_url}}" alt="Wedding event gallery photo" loading="lazy" width="400" height="300">
                     <i class="pi pi-search" (click)="onSwitchModal(item.img_url)"></i>

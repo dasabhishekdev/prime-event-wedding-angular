@@ -16,8 +16,8 @@
         employees, fundraising, team buildings activities, motivational events, incentives, and many more.
     </p>
 
-    <h5 class="section-title">Event Planner</h5>
-    <h2 class="text-1 ">We can give more glory</h2>
+    <h2 class="section-title">Event Planner</h2>
+    <h3 class="text-1 ">We can give more glory</h3>
     <div class="row">
 
         <div class="text-start col-sm-6">
@@ -100,10 +100,10 @@
         </div>
     </div>
     <div *ngIf="imageUrls.length">
-        <h5 class="section-title">Our work</h5>
-        <h2 class="text-1 ">Gallery</h2>
+        <h2 class="section-title">Our work</h2>
+        <h3 class="text-1 ">Gallery</h3>
         <div class="row">
-            <div class="col-md-3 mt-md-0" *ngFor="let item of imageUrls">
+            <div class="col-6 col-md-4 col-lg-3 mt-3 mt-md-0" *ngFor="let item of imageUrls">
                 <div class="gallery-img">
                     <img src="{{item.img_url}}" alt="Product launch event gallery photo" loading="lazy" width="400" height="300">
                     <i class="pi pi-search" (click)="onSwitchModal(item.img_url)"></i>

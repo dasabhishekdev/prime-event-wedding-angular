@@ -1,22 +1,23 @@
-<div class="container-fluid d-flex flex-column justify-content-center mt-0 min-height">
-    <div class="" style="background-color: #fff3d149;">
-        <div class=" p-2 container mx-auto">
-            <div class="justify-content-between">
-                <h1 class="text-1">{{childPath}} </h1>
-                <div class="breadcrumb-panel">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-li">
-                            <a routerLink="/Home/best-event-organizer" href="/Home/best-event-organizer"><i class="fa-solid fa-house"></i> Home</a>
-                        </li>
-                        <li class="breadcrumb-li">
-                            <span>{{childPath}}</span>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+<div class="page-layout">
+  <header class="page-hero">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="page-breadcrumb">
+        <ol class="page-breadcrumb__list">
+          <li class="page-breadcrumb__item">
+            <a routerLink="/Home/best-event-organizer" href="/Home/best-event-organizer">
+              <i class="fa-solid fa-house" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="page-breadcrumb__item page-breadcrumb__item--current" aria-current="page">
+            <h1 class="page-breadcrumb__current">{{ pageTitle }}</h1>
+          </li>
+        </ol>
+      </nav>
     </div>
-    <div class="container p-2">
-        <router-outlet></router-outlet>
-    </div>
+  </header>
+
+  <div class="container page-content">
+    <router-outlet></router-outlet>
+  </div>
 </div>

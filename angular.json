@@ -40,10 +40,8 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/primeicons/primeicons.css",
-              "./node_modules/primeng/resources/primeng.min.css",
-              "./node_modules/primeng/resources/themes/saga-orange/theme.css",
-              "./node_modules/ngx-toastr/toastr.css"
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -80,16 +78,48 @@
           },
           "defaultConfiguration": "production"
         },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/prime-event-app/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "options": {
+            "browserTarget": "prime-event-app:build:development",
+            "serverTarget": "prime-event-app:server:development"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "prime-event-app:build:production",
+              "serverTarget": "prime-event-app:server:production"
+            }
+          }
+        },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "prime-event-app:build:production",
-              "proxyConfig": "./proxy.conf.json"
+              "proxyConfig": "./proxy.conf.json",
+              "buildTarget": "prime-event-app:build:production"
             },
             "development": {
-              "browserTarget": "prime-event-app:build:development",
-              "proxyConfig": "./proxy.conf.json"
+              "proxyConfig": "./proxy.conf.json",
+              "buildTarget": "prime-event-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,7 +127,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "prime-event-app:build"
+            "buildTarget": "prime-event-app:build"
           }
         },
         "test": {
@@ -115,16 +145,13 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/primeicons/primeicons.css",
-              "./node_modules/primeng/resources/primeng.min.css",
-              "./node_modules/primeng/resources/themes/saga-orange/theme.css",
-              "./node_modules/ngx-toastr/toastr.css"
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
         }
       }
     }
-  },
-  "defaultProject": "prime-event-app"
+  }
 }
