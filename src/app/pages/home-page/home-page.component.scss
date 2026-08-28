@@ -72,9 +72,10 @@
       margin-bottom: 16px;
 
       img {
-        width: clamp(14rem, 44vw, 24rem);
+        width: clamp(18rem, 62vw, 34rem);
         height: auto;
-        max-width: min(92vw, 24rem);
+        aspect-ratio: 720 / 302;
+        max-width: min(96vw, 34rem);
       }
     }
   }
@@ -92,7 +93,7 @@
       padding: 8px 16px 24px;
 
       .logo img {
-        width: clamp(12rem, 52vw, 18rem);
+        width: clamp(16rem, 78vw, 28rem);
       }
 
       h1,
